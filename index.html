@@ -1,0 +1,354 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>College Bus Tracking System</title>
+    <style>
+        body {
+            font-family: sans-serif;
+            margin: 0;
+            background-color: #f4f4f4;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            padding: 20px;
+        }
+
+        .container {
+            background-color: #fff;
+            padding: 30px;
+            border-radius: 8px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            width: 80%;
+            max-width: 960px;
+            display: grid;
+            grid-template-columns: 1fr 2fr;
+            gap: 30px;
+            align-items: start; /* Align items to the top to reduce bottom space */
+        }
+
+        .left-section {
+            padding-right: 20px;
+        }
+
+        .right-section {
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+        }
+
+        h1 {
+            color: #333;
+            margin-top: 0;
+        }
+
+        p {
+            color: #555;
+            line-height: 1.6;
+        }
+
+        .search-container {
+            background-color: #e9f2ff;
+            padding: 50px;
+            border-radius: 6px;
+            border: 1px solid #d1e5ff;
+        }
+
+        .search-title {
+            font-weight: bold;
+            margin-bottom: 10px;
+            color: #337ab7;
+        }
+
+        .location-search {
+            display: grid;
+            grid-template-columns: 1fr auto 1fr;
+            gap: 10px;
+            align-items: center;
+            margin-bottom: 15px;
+        }
+
+        .location-search input[type="text"] {
+            padding: 10px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+        }
+
+        .swap-button {
+            background: none;
+            border: none;
+            font-size: 1.5em;
+            cursor: pointer;
+            color: #555;
+        }
+
+        .search-button, .clear-button {
+            background-color: #337ab7;
+            color: white;
+            border: none;
+            padding: 10px 15px;
+            border-radius: 4px;
+            cursor: pointer;
+            font-size: 1em;
+        }
+
+        .clear-button {
+            background-color: #f0ad4e;
+            margin-left: 10px;
+        }
+
+        .search-by {
+            display: flex;
+            gap: 15px;
+            margin-bottom: 10px;
+        }
+
+        .search-by label {
+            display: flex;
+            align-items: center;
+            cursor: pointer;
+        }
+
+        .search-by input[type="radio"] {
+            margin-right: 5px;
+        }
+
+        .input-group {
+            display: flex;
+            gap: 10px;
+            margin-bottom: 15px;
+        }
+
+        .input-group input[type="text"] {
+            padding: 10px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+            flex-grow: 1;
+        }
+
+        .additional-options {
+            margin-top: 20px;
+            padding: 15px;
+            border: 1px solid #ddd;
+            border-radius: 6px;
+            background-color: #f9f9f9;
+        }
+
+        .additional-options h3 {
+            margin-top: 0;
+            color: #333;
+            font-size: 1.2em;
+            margin-bottom: 10px;
+        }
+
+        .additional-options div {
+            margin-bottom: 10px;
+        }
+
+        .additional-options label {
+            display: block;
+            margin-bottom: 5px;
+            font-weight: bold;
+        }
+
+        .additional-options select {
+            width: 100%;
+            padding: 8px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+            box-sizing: border-box;
+        }
+
+        .footer {
+            background-color: #f9f9f9;
+            padding: 20px;
+            margin-top: 10px;
+            border-top: 1px solid #eee;
+            width: 100%;
+            box-sizing: border-box;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 10px;
+            font-size: 0.9em;
+            color: #555;
+        }
+
+        .footer-links {
+            display: flex;
+            gap: 60px;
+        }
+
+        .footer-links a {
+            color: #337ab7;
+            text-decoration: none;
+        }
+
+        .footer-links a:hover {
+            text-decoration: underline;
+        }
+
+        .footer-location {
+            margin-top: 5px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="left-section">
+            <h1>The Real-Time College Bus Tracking System</h1>
+            <p>The Real-Time College Bus Tracking System aims to enhance the commuting experience for students and faculty by providing accurate, real-time information about bus locations and estimated arrival times.</p>
+
+            <div class="additional-options">
+                <h3>[Service/Vehicle No.]</h3>
+                <div>
+                    <label for="source-left">Service No.</label>
+                    <select id="source-left" onchange="updateSearchResults()">
+                        <option value="">Select Service Number</option>
+                    </select>
+                </div>
+                <div>
+                    <label for="destination-left">Vehicle No.</label>
+                    <select id="destination-left" onchange="updateSearchResults()">
+                        <option value="">Select Vehicle Number</option>
+                    </select>
+                </div>
+            </div>
+        </div>
+        <div class="right-section">
+            <div class="search-container">
+                <div class="search-title">Search for Buses Between Two Locations (From - to)</div>
+                <div class="location-search">
+                    <input type="text" id="source" placeholder="Source">
+                    <button class="swap-button" onclick="swapLocations()">&#8644;</button>
+                    <input type="text" id="destination" placeholder="Destination">
+                </div>
+                <button class="search-button" onclick="searchBuses()">Search</button>
+                <button class="clear-button" onclick="clearLocationSearch()">Clear</button>
+            </div>
+
+            <div class="search-container">
+                <div class="search-title">Search By Service No / Vehicle Number</div>
+                <div class="search-by">
+                    <label><input type="radio" name="searchType" value="serviceNo" id="byServiceNo"> By Service No.</label>
+                    <label><input type="radio" name="searchType" value="vehicleNo" id="byVehicleNo"> By Vehicle No.</label>
+                </div>
+                <div class="input-group">
+                    <input type="text" id="serviceVehicleNo" placeholder="Enter Service / Vehicle No">
+                </div>
+                <button class="search-button" onclick="searchByNumber()">Search</button>
+                <button class="clear-button" onclick="clearNumberSearch()">Clear</button>
+            </div>
+        </div>
+    </div>
+
+    <div class="footer">
+        <div class="footer-links">
+            <a href="AdminLoginPage.html">Admin Login</a>
+            <a href="DriverLoginPage.html">Driver Login</a>
+            <a href="#">FeedBack</a>
+            <a href="#">Contact Us</a>
+            <a href="#">About Us</a>
+        </div>
+        <div class="footer-location">
+            Madanapalle, Andhra Pradesh, India
+        </div>
+        <div>
+            &copy; 2025 College Bus Tracking System
+        </div>
+    </div>
+
+    <script>
+        // Placeholder data for service and vehicle numbers
+        const serviceNumbers = ['S101', 'S102', 'S103', 'S104'];
+        const vehicleNumbers = ['V201', 'V202', 'V203', 'V204', 'V205'];
+
+        document.addEventListener('DOMContentLoaded', function() {
+            populateDropdown('source-left', serviceNumbers);
+            populateDropdown('destination-left', vehicleNumbers);
+        });
+
+        function populateDropdown(selectId, dataArray) {
+            const selectElement = document.getElementById(selectId);
+            dataArray.forEach(item => {
+                const option = document.createElement('option');
+                option.value = item;
+                option.textContent = item;
+                selectElement.appendChild(option);
+            });
+        }
+
+        function swapLocations() {
+            const sourceInput = document.getElementById('source');
+            const destinationInput = document.getElementById('destination');
+            const temp = sourceInput.value;
+            sourceInput.value = destinationInput.value;
+            destinationInput.value = temp;
+        }
+
+        function searchBuses() {
+            const source = document.getElementById('source').value;
+            const destination = document.getElementById('destination').value;
+            if (source && destination) {
+                alert(`Searching for buses from ${source} to ${destination}`);
+                // In a real application, you would send this data to a server
+            } else {
+                alert('Please enter both source and destination.');
+            }
+        }
+
+        function clearLocationSearch() {
+            document.getElementById('source').value = '';
+            document.getElementById('destination').value = '';
+        }
+
+        function searchByNumber() {
+            const serviceVehicleNo = document.getElementById('serviceVehicleNo').value;
+            const byServiceNo = document.getElementById('byServiceNo').checked;
+            const byVehicleNo = document.getElementById('byVehicleNo').checked;
+
+            if (serviceVehicleNo) {
+                if (byServiceNo) {
+                    alert(`Searching by Service No: ${serviceVehicleNo}`);
+                    // In a real application, you would send this data to a server
+                } else if (byVehicleNo) {
+                    alert(`Searching by Vehicle No: ${serviceVehicleNo}`);
+                    // In a real application, you would send this data to a server
+                } else {
+                    alert('Please select either Service No or Vehicle No.');
+                }
+            } else {
+                alert('Please enter a Service or Vehicle Number.');
+            }
+        }
+
+        function clearNumberSearch() {
+            document.getElementById('serviceVehicleNo').value = '';
+            document.getElementById('byServiceNo').checked = false;
+            document.getElementById('byVehicleNo').checked = false;
+        }
+
+        function searchLeft() {
+            const sourceLeft = document.getElementById('source-left').value;
+            const destinationLeft = document.getElementById('destination-left').value;
+
+            if (sourceLeft && destinationLeft) {
+                // Store the selected values in local storage
+                localStorage.setItem('searchSource', sourceLeft);
+                localStorage.setItem('searchDestination', destinationLeft);
+
+                // Redirect to the results page
+                window.location.href = 'bus_results.html';
+            } else {
+                alert('Please select both Service Number and Vehicle Number.');
+            }
+        }
+
+        function clearLeft() {
+            document.getElementById('source-left').selectedIndex = 0;
+            document.getElementById('destination-left').selectedIndex = 0;
+        }
+    </script>
+</body>
+</html>
