@@ -1,0 +1,165 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Driver Login</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: sans-serif;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            background-color: #f4f4f4;
+        }
+
+        .login-container {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 20px;
+            background-color: white;
+            padding: 30px;
+            border-radius: 8px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            width: 80%;
+            max-width: 900px;
+        }
+
+        .left-side {
+            /* Intentionally left blank */
+            background-color: #f9f9f9; /* Optional: Light background for visual separation during development */
+            border-radius: 6px;
+        }
+
+        .right-side {
+            padding: 20px;
+            display: flex;
+            flex-direction: column;
+            justify-content: center; /* Center content vertically */
+        }
+
+        h2 {
+            color: #333;
+            margin-bottom: 20px;
+            text-align: center;
+        }
+
+        .input-group {
+            margin-bottom: 15px;
+        }
+
+        label {
+            display: block;
+            margin-bottom: 5px;
+            font-weight: bold;
+            color: #555;
+        }
+
+        input[type="text"],
+        input[type="password"] {
+            width: 100%;
+            padding: 10px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+            box-sizing: border-box;
+            font-size: 1em;
+        }
+
+        button {
+            background-color: #337ab7; /* Matching the primary button color */
+            color: white;
+            border: none;
+            padding: 10px 15px;
+            border-radius: 4px;
+            cursor: pointer;
+            font-size: 1em;
+            width: 100%;
+            margin-top: 10px;
+        }
+
+        button:hover {
+            background-color: #286090;
+        }
+
+        .error-message {
+            color: #d9534f;
+            margin-top: 15px;
+            font-size: 0.9em;
+            text-align: center;
+        }
+    </style>
+</head>
+<body>
+    <div class="login-container">
+        <div class="left-side">
+            </div>
+        <div class="right-side">
+            <h2>Driver Login</h2>
+            <form id="driver-login-form">
+                <div class="input-group">
+                    <label for="driver-id">Driver ID</label>
+                    <input type="text" id="driver-id" name="driver-id" required>
+                </div>
+
+                <div class="input-group">
+                    <label for="service-number">Service Number</label>
+                    <input type="text" id="service-number" name="service-number" required>
+                </div>
+
+                <div class="input-group">
+                    <label for="vehicle-number">Vehicle Number</label>
+                    <input type="text" id="vehicle-number" name="vehicle-number" required>
+                </div>
+
+                <div class="input-group">
+                    <label for="driver-password">Password</label>
+                    <input type="password" id="driver-password" name="driver-password" required>
+                </div>
+
+                <button type="submit">Login</button>
+                <div id="error-message" class="error-message" style="display: none;">Invalid Credentials</div>
+            </form>
+        </div>
+    </div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function () {
+            const loginForm = document.getElementById('driver-login-form');
+            const driverIdInput = document.getElementById('driver-id');
+            const serviceNumberInput = document.getElementById('service-number');
+            const vehicleNumberInput = document.getElementById('vehicle-number');
+            const passwordInput = document.getElementById('driver-password');
+            const errorMessageDiv = document.getElementById('error-message');
+
+            loginForm.addEventListener('submit', function (e) {
+                e.preventDefault();
+                const driverId = driverIdInput.value;
+                const serviceNumber = serviceNumberInput.value;
+                const vehicleNumber = vehicleNumberInput.value;
+                const password = passwordInput.value;
+
+                // **Replace this with your actual driver login validation logic**
+                // For a real application, you would typically send this data to a server for verification.
+                // This is a client-side example for demonstration purposes only.
+                if (driverId === 'driver123' && serviceNumber === 'S101' && vehicleNumber === 'V201' && password === 'driverpass') {
+                    // Redirect to the driver dashboard or another appropriate page
+                    window.location.href = 'driver_dashboard.html';
+                } else {
+                    errorMessageDiv.style.display = 'block';
+                    driverIdInput.value = '';
+                    serviceNumberInput.value = '';
+                    vehicleNumberInput.value = '';
+                    passwordInput.value = '';
+                }
+            });
+        });
+    </script>
+</body>
+</html>

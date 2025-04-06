@@ -1,0 +1,176 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admin Login</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: sans-serif;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            background-color: #f4f4f4;
+        }
+
+        .login-container {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 20px;
+            background-color: white;
+            padding: 30px;
+            border-radius: 8px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            width: 80%;
+            max-width: 900px;
+        }
+
+        .left-side {
+            /* Intentionally left blank */
+            background-color: #f9f9f9; /* Optional: Light background for visual separation */
+            border-radius: 6px;
+        }
+
+        .right-side {
+            padding: 20px;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+        }
+
+        h2 {
+            color: #333;
+            margin-bottom: 30px;
+            text-align: center;
+        }
+
+        .input-group {
+            margin-bottom: 20px;
+        }
+
+        label {
+            display: block;
+            margin-bottom: 8px;
+            font-weight: bold;
+            color: #555;
+        }
+
+        input[type="text"],
+        input[type="password"] {
+            width: 100%;
+            padding: 10px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+            box-sizing: border-box;
+            font-size: 1em;
+        }
+
+        button {
+            background-color: #337ab7; /* Matching the primary button color */
+            color: white;
+            border: none;
+            padding: 10px 15px;
+            border-radius: 4px;
+            cursor: pointer;
+            font-size: 1em;
+            width: 100%;
+            margin-bottom: 15px;
+        }
+
+        button:hover {
+            background-color: #286090;
+        }
+
+        .forgot-password,
+        .reset-password {
+            text-align: center;
+            font-size: 0.9em;
+            margin-top: 10px;
+        }
+
+        .forgot-password a,
+        .reset-password a {
+            color: #007bff;
+            text-decoration: none;
+        }
+
+        .forgot-password a:hover,
+        .reset-password a:hover {
+            text-decoration: underline;
+        }
+
+        .error-message {
+            color: #d9534f;
+            margin-top: 15px;
+            font-size: 0.9em;
+            text-align: center;
+        }
+    </style>
+</head>
+<body>
+    <div class="login-container">
+        <div class="left-side">
+            </div>
+        <div class="right-side">
+            <h2>Admin Login</h2>
+            <form id="admin-login-form">
+                <div class="input-group">
+                    <label for="admin-id">Admin ID</label>
+                    <input type="text" id="admin-id" name="admin-id" required>
+                </div>
+
+                <div class="input-group">
+                    <label for="admin-password">Password</label>
+                    <input type="password" id="admin-password" name="admin-password" required>
+                </div>
+
+                <button type="submit">Login</button>
+
+                <div class="forgot-password">
+                    <a href="#">Forgot Password?</a>
+                </div>
+
+                <div class="reset-password">
+                    <a href="#">Reset Password</a>
+                </div>
+
+                <div id="error-message" class="error-message" style="display: none;">Invalid Admin ID or Password</div>
+            </form>
+        </div>
+    </div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function () {
+            const loginForm = document.getElementById('admin-login-form');
+            const adminIdInput = document.getElementById('admin-id');
+            const passwordInput = document.getElementById('admin-password');
+            const errorMessageDiv = document.getElementById('error-message');
+
+            loginForm.addEventListener('submit', function (e) {
+                e.preventDefault();
+                const adminId = adminIdInput.value;
+                const password = passwordInput.value;
+
+                // **Replace this with your actual admin ID and password validation logic**
+                // For a real application, you would typically send this to a server for verification.
+                // This is a client-side example for demonstration purposes only.
+                if (adminId === 'admin' && password === 'password123') {
+                    // Redirect to the admin dashboard or another appropriate page
+                    window.location.href = 'admin_dashboard.html';
+                } else {
+                    errorMessageDiv.style.display = 'block';
+                    adminIdInput.value = '';
+                    passwordInput.value = '';
+                }
+            });
+        });
+    </script>
+</body>
+</html>
