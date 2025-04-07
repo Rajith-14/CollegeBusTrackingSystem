@@ -12,131 +12,198 @@
             display: flex;
             flex-direction: column;
             align-items: center;
-            padding: 10px; /* Reduced padding for smaller screens */
+            padding: 20px; /* Default padding for larger screens */
         }
 
         .container {
             background-color: #fff;
-            padding: 20px; /* Reduced padding for smaller screens */
+            padding: 30px; /* Default padding for larger screens */
             border-radius: 8px;
             box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-            width: 95%; /* Adjusted width for better mobile fit */
+            width: 80%;
             max-width: 960px;
-            display: flex; /* Changed to flex to control stacking */
-            flex-direction: column; /* Stack sections on smaller screens */
-            gap: 20px; /* Reduced gap for smaller screens */
-            align-items: stretch; /* Make items take full width */
+            display: grid; /* Default to grid for larger screens */
+            grid-template-columns: 1fr 2fr;
+            gap: 30px;
+            align-items: start;
         }
 
-        @media (min-width: 768px) {
+        /* Media query for smaller screens (max-width: 767px) */
+        @media (max-width: 767px) {
+            body {
+                padding: 10px; /* Reduced padding for smaller screens */
+            }
+
             .container {
-                display: grid; /* Revert to grid for larger screens */
-                grid-template-columns: 1fr 2fr; /* Two columns on larger screens */
-                gap: 30px;
-                padding: 30px;
-                width: 80%;
+                width: 95%; /* Adjusted width for better mobile fit */
+                padding: 20px; /* Reduced padding for smaller screens */
+                display: flex; /* Switch to flex for stacking on smaller screens */
+                flex-direction: column;
+                gap: 20px; /* Reduced gap for smaller screens */
+                align-items: stretch; /* Make items take full width */
+            }
+
+            .left-section {
+                padding-right: 0; /* Remove right padding on smaller screens */
             }
         }
 
         .left-section {
-            padding-right: 0; /* Remove right padding on smaller screens */
-        }
-
-        @media (min-width: 768px) {
-            .left-section {
-                padding-right: 20px;
-            }
+            padding-right: 20px; /* Default right padding for larger screens */
         }
 
         .right-section {
             display: flex;
             flex-direction: column;
-            gap: 15px; /* Reduced gap for smaller screens */
+            gap: 20px;
         }
 
         h1 {
             color: #333;
             margin-top: 0;
-            font-size: 1.5em; /* Adjusted font size for smaller screens */
-            text-align: center; /* Center the title on smaller screens */
         }
 
-        @media (min-width: 768px) {
+        /* Mobile specific heading style */
+        @media (max-width: 767px) {
             h1 {
-                font-size: 2em;
-                text-align: left;
+                font-size: 1.5em; /* Adjusted font size for smaller screens */
+                text-align: center; /* Center the title on smaller screens */
             }
         }
 
         p {
             color: #555;
             line-height: 1.6;
-            font-size: 0.9em; /* Adjusted font size for smaller screens */
+            font-size: 1em; /* Slightly reduced default font size */
+        }
+
+        /* Mobile specific paragraph style */
+        @media (max-width: 767px) {
+            p {
+                font-size: 0.9em; /* Further adjusted font size for smaller screens */
+            }
         }
 
         .search-container {
             background-color: #e9f2ff;
-            padding: 20px; /* Reduced padding for smaller screens */
             border-radius: 6px;
             border: 1px solid #d1e5ff;
+        }
+
+        /* Adjust search container padding for different screen sizes */
+        @media (max-width: 767px) {
+            .search-container {
+                padding: 20px; /* Reduced padding for smaller screens */
+            }
+        }
+
+        @media (min-width: 768px) {
+            .search-container {
+                padding: 50px; /* Default padding for larger screens */
+            }
         }
 
         .search-title {
             font-weight: bold;
             margin-bottom: 10px;
             color: #337ab7;
-            font-size: 1em; /* Adjusted font size for smaller screens */
+        }
+
+        /* Mobile specific search title style */
+        @media (max-width: 767px) {
+            .search-title {
+                font-size: 1em; /* Adjusted font size for smaller screens */
+            }
         }
 
         .location-search {
             display: grid;
             grid-template-columns: 1fr auto 1fr;
-            gap: 5px; /* Reduced gap for smaller screens */
+            gap: 10px;
             align-items: center;
-            margin-bottom: 10px; /* Reduced margin for smaller screens */
+            margin-bottom: 15px;
+        }
+
+        /* Mobile specific location search style */
+        @media (max-width: 767px) {
+            .location-search {
+                grid-template-columns: 1fr auto 1fr; /* Maintain grid for alignment */
+                gap: 5px; /* Reduced gap for smaller screens */
+                margin-bottom: 10px; /* Reduced margin for smaller screens */
+            }
         }
 
         .location-search input[type="text"] {
-            padding: 8px; /* Reduced padding for smaller screens */
+            padding: 10px;
             border: 1px solid #ccc;
             border-radius: 4px;
-            font-size: 0.9em; /* Adjusted font size for smaller screens */
+        }
+
+        /* Mobile specific location search input style */
+        @media (max-width: 767px) {
+            .location-search input[type="text"] {
+                padding: 8px; /* Reduced padding for smaller screens */
+                font-size: 0.9em; /* Adjusted font size for smaller screens */
+            }
         }
 
         .swap-button {
             background: none;
             border: none;
-            font-size: 1.2em; /* Adjusted font size for smaller screens */
+            font-size: 1.5em;
             cursor: pointer;
             color: #555;
-            padding: 5px; /* Reduced padding for smaller screens */
+        }
+
+        /* Mobile specific swap button style */
+        @media (max-width: 767px) {
+            .swap-button {
+                font-size: 1.2em; /* Adjusted font size for smaller screens */
+                padding: 5px; /* Reduced padding for smaller screens */
+            }
         }
 
         .search-button, .clear-button {
             background-color: #337ab7;
             color: white;
             border: none;
-            padding: 8px 12px; /* Reduced padding for smaller screens */
+            padding: 10px 15px;
             border-radius: 4px;
             cursor: pointer;
-            font-size: 0.9em; /* Adjusted font size for smaller screens */
+            font-size: 1em;
+        }
+
+        /* Mobile specific search/clear button style */
+        @media (max-width: 767px) {
+            .search-button, .clear-button {
+                padding: 8px 12px; /* Reduced padding for smaller screens */
+                font-size: 0.9em; /* Adjusted font size for smaller screens */
+            }
         }
 
         .clear-button {
             background-color: #f0ad4e;
-            margin-left: 5px; /* Reduced margin for smaller screens */
+            margin-left: 10px;
+        }
+
+        /* Mobile specific clear button margin */
+        @media (max-width: 767px) {
+            .clear-button {
+                margin-left: 5px; /* Reduced margin for smaller screens */
+            }
         }
 
         .search-by {
             display: flex;
-            gap: 10px; /* Reduced gap for smaller screens */
-            margin-bottom: 10px; /* Reduced margin for smaller screens */
-            flex-direction: column; /* Stack radio buttons on smaller screens */
+            gap: 15px;
+            margin-bottom: 10px;
         }
 
-        @media (min-width: 500px) {
+        /* Mobile specific search by style */
+        @media (max-width: 500px) {
             .search-by {
-                flex-direction: row; /* Display radio buttons in a row on larger screens */
+                flex-direction: column; /* Stack radio buttons on smaller screens */
+                gap: 10px; /* Reduced gap for smaller screens */
             }
         }
 
@@ -144,7 +211,13 @@
             display: flex;
             align-items: center;
             cursor: pointer;
-            font-size: 0.9em; /* Adjusted font size for smaller screens */
+        }
+
+        /* Mobile specific search by label style */
+        @media (max-width: 767px) {
+            .search-by label {
+                font-size: 0.9em; /* Adjusted font size for smaller screens */
+            }
         }
 
         .search-by input[type="radio"] {
@@ -153,63 +226,109 @@
 
         .input-group {
             display: flex;
-            gap: 5px; /* Reduced gap for smaller screens */
-            margin-bottom: 10px; /* Reduced margin for smaller screens */
-            flex-direction: column; /* Stack input on smaller screens */
+            gap: 10px;
+            margin-bottom: 15px;
         }
 
-        @media (min-width: 500px) {
+        /* Mobile specific input group style */
+        @media (max-width: 500px) {
             .input-group {
-                flex-direction: row; /* Display input in a row on larger screens */
+                flex-direction: column; /* Stack input on smaller screens */
+                gap: 5px; /* Reduced gap for smaller screens */
+                margin-bottom: 10px; /* Reduced margin for smaller screens */
             }
         }
 
         .input-group input[type="text"] {
-            padding: 8px; /* Reduced padding for smaller screens */
+            padding: 10px;
             border: 1px solid #ccc;
             border-radius: 4px;
             flex-grow: 1;
-            font-size: 0.9em; /* Adjusted font size for smaller screens */
+        }
+
+        /* Mobile specific input group input style */
+        @media (max-width: 767px) {
+            .input-group input[type="text"] {
+                padding: 8px; /* Reduced padding for smaller screens */
+                font-size: 0.9em; /* Adjusted font size for smaller screens */
+            }
         }
 
         .additional-options {
-            margin-top: 15px; /* Reduced margin for smaller screens */
-            padding: 10px; /* Reduced padding for smaller screens */
+            margin-top: 20px;
+            padding: 15px;
             border: 1px solid #ddd;
             border-radius: 6px;
             background-color: #f9f9f9;
         }
 
+        /* Mobile specific additional options style */
+        @media (max-width: 767px) {
+            .additional-options {
+                margin-top: 15px; /* Reduced margin for smaller screens */
+                padding: 10px; /* Reduced padding for smaller screens */
+            }
+        }
+
         .additional-options h3 {
             margin-top: 0;
             color: #333;
-            font-size: 1em; /* Adjusted font size for smaller screens */
-            margin-bottom: 8px; /* Reduced margin for smaller screens */
+            font-size: 1.2em;
+            margin-bottom: 10px;
+        }
+
+        /* Mobile specific additional options heading style */
+        @media (max-width: 767px) {
+            .additional-options h3 {
+                font-size: 1em; /* Adjusted font size for smaller screens */
+                margin-bottom: 8px; /* Reduced margin for smaller screens */
+            }
         }
 
         .additional-options div {
-            margin-bottom: 8px; /* Reduced margin for smaller screens */
+            margin-bottom: 10px;
+        }
+
+        /* Mobile specific additional options div style */
+        @media (max-width: 767px) {
+            .additional-options div {
+                margin-bottom: 8px; /* Reduced margin for smaller screens */
+            }
         }
 
         .additional-options label {
             display: block;
-            margin-bottom: 3px; /* Reduced margin for smaller screens */
+            margin-bottom: 5px;
             font-weight: bold;
-            font-size: 0.9em; /* Adjusted font size for smaller screens */
+        }
+
+        /* Mobile specific additional options label style */
+        @media (max-width: 767px) {
+            .additional-options label {
+                font-size: 0.9em; /* Adjusted font size for smaller screens */
+                margin-bottom: 3px; /* Reduced margin for smaller screens */
+            }
         }
 
         .additional-options select {
             width: 100%;
-            padding: 6px; /* Reduced padding for smaller screens */
+            padding: 8px;
             border: 1px solid #ccc;
             border-radius: 4px;
             box-sizing: border-box;
-            font-size: 0.9em; /* Adjusted font size for smaller screens */
+        }
+
+        /* Mobile specific additional options select style */
+        @media (max-width: 767px) {
+            .additional-options select {
+                padding: 6px; /* Reduced padding for smaller screens */
+                font-size: 0.9em; /* Adjusted font size for smaller screens */
+            }
         }
 
         .footer {
             background-color: #f9f9f9;
-            padding: 15px; /* Reduced padding for smaller screens */
+            padding: 20px;
             margin-top: 10px;
             border-top: 1px solid #eee;
             width: 100%;
@@ -217,24 +336,30 @@
             display: flex;
             flex-direction: column;
             align-items: center;
-            gap: 8px; /* Reduced gap for smaller screens */
-            font-size: 0.8em; /* Adjusted font size for smaller screens */
+            gap: 10px;
+            font-size: 0.9em;
             color: #555;
-            text-align: center; /* Center footer content on smaller screens */
+            text-align: center;
+        }
+
+        /* Mobile specific footer style */
+        @media (max-width: 600px) {
+            .footer {
+                padding: 15px; /* Reduced padding for smaller screens */
+                gap: 8px; /* Reduced gap for smaller screens */
+                font-size: 0.8em; /* Adjusted font size for smaller screens */
+            }
+
+            .footer-links {
+                flex-direction: column; /* Stack links on smaller screens */
+                gap: 30px; /* Reduced gap for smaller screens */
+                align-items: center; /* Center links on smaller screens */
+            }
         }
 
         .footer-links {
             display: flex;
-            gap: 30px; /* Reduced gap for smaller screens */
-            flex-direction: column; /* Stack links on smaller screens */
-            align-items: center; /* Center links on smaller screens */
-        }
-
-        @media (min-width: 600px) {
-            .footer-links {
-                flex-direction: row; /* Display links in a row on larger screens */
-                gap: 60px;
-            }
+            gap: 60px;
         }
 
         .footer-links a {
@@ -247,7 +372,14 @@
         }
 
         .footer-location {
-            margin-top: 3px; /* Reduced margin for smaller screens */
+            margin-top: 5px;
+        }
+
+        /* Mobile specific footer location style */
+        @media (max-width: 767px) {
+            .footer-location {
+                margin-top: 3px; /* Reduced margin for smaller screens */
+            }
         }
     </style>
 </head>
@@ -332,7 +464,8 @@
                 const option = document.createElement('option');
                 option.value = item;
                 option.textContent = item;
-                selectElement.appendChild(option);
+                selectElement.appendChild
+                (option);
             });
         }
 
